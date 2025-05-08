@@ -1,38 +1,56 @@
-
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <link rel="stylesheet" th:href="@{/styles.css}" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet">
     <title>Registrar Persona</title>
 </head>
-<body>
-    <h1 th:text="${persona.id != null} ? 'Editar Persona' : 'Registrar Persona'"></h1>
+<body class="text-bg-dark">
 
-    <form th:action="@{/personas}" th:object="${persona}" method="post">
-        <input type="hidden" th:field="*{id}" />
+    <!-- Header -->
+    <div th:replace="fragments :: encabezado"></div>
 
-        <label for="nombre">Nombre:</label>
-        <input type="text" id="nombre" th:field="*{nombre}" required />
-        <br/>
+    <!-- Contenedor principal -->
+    <div class="container mt-5">
+        <h1 class="text-center mb-4" th:text="${persona.id != null} ? 'Editar Persona' : 'Registrar Persona'"></h1>
 
-        <label for="apellido">Apellido:</label>
-        <input type="text" id="apellido" th:field="*{apellido}" required />
-        <br/>
+        <form th:action="@{/personas}" th:object="${persona}" method="post" class="bg-dark p-4 rounded shadow">
+            <input type="hidden" th:field="*{id}" />
 
-        <label for="email">Email:</label>
-        <input type="email" id="email" th:field="*{email}" required />
-        <br/>
+            <div class="mb-3">
+                <label for="nombre" class="form-label">Nombre:</label>
+                <input type="text" id="nombre" th:field="*{nombre}" class="form-control" required />
+            </div>
 
-        <label for="telefono">Teléfono:</label>
-        <input type="text" id="telefono" th:field="*{telefono}" />
-        <br/>
+            <div class="mb-3">
+                <label for="apellido" class="form-label">Apellido:</label>
+                <input type="text" id="apellido" th:field="*{apellido}" class="form-control" required />
+            </div>
 
-        <label for="direccion">Dirección:</label>
-        <input type="text" id="direccion" th:field="*{direccion}" />
-        <br/>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email:</label>
+                <input type="email" id="email" th:field="*{email}" class="form-control" required />
+            </div>
 
-        <button type="submit">Guardar</button>
-    </form>
+            <div class="mb-3">
+                <label for="telefono" class="form-label">Teléfono:</label>
+                <input type="text" id="telefono" th:field="*{telefono}" class="form-control" />
+            </div>
 
-    <a th:href="@{/personas}">Volver a la lista</a>
+            <div class="mb-3">
+                <label for="direccion" class="form-label">Dirección:</label>
+                <input type="text" id="direccion" th:field="*{direccion}" class="form-control" />
+            </div>
+
+            <div class="d-grid">
+                <button type="submit" class="btn btn-primary">Guardar</button>
+            </div>
+        </form>
+
+        <div class="text-center mt-3">
+            <a th:href="@{/personas}" class="btn btn-link text-light">Volver a la lista</a>
+        </div>
+    </div>
+
 </body>
 </html>

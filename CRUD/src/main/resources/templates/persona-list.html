@@ -1,35 +1,51 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <link rel="stylesheet" th:href="@{/styles.css}" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet">
     <title>Lista de Personas</title>
 </head>
-<body>
-    <h1>Lista de Personas</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>Nombre</th>
-                <th>Apellido</th>
-                <th>Email</th>
-                <th>Teléfono</th>
-                <th>Dirección</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:each="persona : ${personas}">
-                <td th:text="${persona.nombre}">Nombre</td>
-                <td th:text="${persona.apellido}">Apellido</td>
-                <td th:text="${persona.email}">Email</td>
-                <td th:text="${persona.telefono}">Teléfono</td>
-                <td th:text="${persona.direccion}">Dirección</td>
-                <td>
-                    <a href="@{personas/editar/{id} (id=${persona.id})}">Editar</a>
-                    <a href="@{personas/editar/{id} (id=${persona.id})}">Eliminar</a>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <a href="/personas/nuevo">Nueva Persona</a>
+<body class="text-bg-dark">
+
+    <!-- Encabezado -->
+    <div th:replace="fragments :: encabezado"></div>
+
+    <!-- Contenedor principal -->
+    <div class="container mt-5">
+        <h1 class="text-center text-white mb-4">Lista de Personas</h1>
+
+        <div class="table-responsive">
+            <table class="table table-dark table-striped table-bordered align-middle">
+                <thead class="table-light text-dark">
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Email</th>
+                        <th>Teléfono</th>
+                        <th>Dirección</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="persona : ${personas}">
+                        <td th:text="${persona.nombre}">Nombre</td>
+                        <td th:text="${persona.apellido}">Apellido</td>
+                        <td th:text="${persona.email}">Email</td>
+                        <td th:text="${persona.telefono}">Teléfono</td>
+                        <td th:text="${persona.direccion}">Dirección</td>
+                        <td>
+                            <a th:href="@{/personas/editar/{id}(id=${persona.id})}" class="btn btn-sm btn-warning me-2">Editar</a>
+                            <a th:href="@{/personas/eliminar/{id}(id=${persona.id})}" class="btn btn-sm btn-danger">Eliminar</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="text-center mt-4">
+            <a th:href="@{/personas/nuevo}" class="btn btn-success">Nueva Persona</a>
+        </div>
+    </div>
+
 </body>
 </html>
